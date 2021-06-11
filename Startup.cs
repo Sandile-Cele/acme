@@ -1,5 +1,7 @@
+using ACME.Models.DatabaseModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,8 +26,8 @@ namespace ACME
         {
             services.AddControllersWithViews();
 
-            //services.AddDbContext<putContectNameInHere>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("putContectNameInHere")));
+            services.AddDbContext<AcmeContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AcmeConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

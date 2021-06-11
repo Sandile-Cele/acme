@@ -19,30 +19,33 @@ create table client(
 	clientAddressId int foreign key references clientAddress(clientAddressId) 
 );
 
-create table administer(
-	administerId int IDENTITY(1,1) PRIMARY KEY not null,
-	administerEmployeeNumber int,
-	administerUsername varchar(255) not null,
-	administerPassword varchar(255) not null,
+create table administrator(
+	administratorId int IDENTITY(1,1) PRIMARY KEY not null,
+	administratorEmployeeNumber int,
+	administratorUsername varchar(255) not null,
+	administratorPassword varchar(255) not null,
 );
 
-create table product(
-	productId int IDENTITY(1,1) PRIMARY KEY not null,
-	productName varchar(255) not null,
-	productPrice decimal (19,4) not null,  
-	productMsrp decimal (19,4), 
-	classId int foreign key references class(classId)
-
-);
 
 create table category (
 	categoryId int IDENTITY(1,1) PRIMARY KEY not null,
 	categoryName varchar(255) not null,
 	categoryDescription varchar(255),
-	categoryImage blob
+	categoryImageUrl varchar(max)
+);
+
+create table product(
+	productId int IDENTITY(1,1) PRIMARY KEY not null,
+	productName varchar(255) not null,
+	productMsrp decimal (19,4), 
+	productPrice decimal (19,4) not null,  
+	categoryId int foreign key references category(categoryId)
 );
 
 create table orderDetails(
-	orderDetilsId int IDENTITY(1,1) PRIMARY KEY not null,
-
+	orderDetailsId int IDENTITY(1,1) PRIMARY KEY not null,
+	orderDetailsDatePlaced Date not null,
+	clientId int foreign key references client(clientId) not null,
+	productId int foreign key references product(productId) not null,
+	orderDetailsFulfilled bit not null
 );
