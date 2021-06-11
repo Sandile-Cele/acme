@@ -11,11 +11,6 @@ namespace ACME.Models.DatabaseModels
     [Table("product")]
     public partial class Product
     {
-        public Product()
-        {
-            OrderDetails = new HashSet<OrderDetail>();
-        }
-
         [Key]
         [Column("productId")]
         public int ProductId { get; set; }
@@ -33,7 +28,5 @@ namespace ACME.Models.DatabaseModels
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty("Products")]
         public virtual Category Category { get; set; }
-        [InverseProperty(nameof(OrderDetail.Product))]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

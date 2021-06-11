@@ -43,7 +43,7 @@ namespace ACME.Controllers
         }
 
         // GET: Administer/Create
-        public IActionResult Create()
+        public IActionResult Signup()
         {
             return View();
         }
@@ -53,7 +53,7 @@ namespace ACME.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdministerId,AdministerEmployeeNumber,AdministerUsername,AdministerPassword")] Administer administer)
+        public async Task<IActionResult> Signup([Bind("AdministerId,AdministerEmployeeNumber,AdministerUsername,AdministerPassword")] Administer administer)
         {
             if (ModelState.IsValid)
             {

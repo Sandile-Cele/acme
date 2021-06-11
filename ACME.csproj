@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <ApplicationIcon>acme.ico</ApplicationIcon>
+    <UserSecretsId>dccdc87e-c419-4b99-bdaf-9f1e237e5c2e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

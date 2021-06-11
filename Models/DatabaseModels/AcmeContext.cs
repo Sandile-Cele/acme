@@ -21,7 +21,6 @@ namespace ACME.Models.DatabaseModels
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<ClientAddress> ClientAddresses { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -62,11 +61,6 @@ namespace ACME.Models.DatabaseModels
                 entity.Property(e => e.ClientPassword).IsUnicode(false);
 
                 entity.Property(e => e.ClientSurname).IsUnicode(false);
-
-                entity.HasOne(d => d.ClientAddress)
-                    .WithMany(p => p.Clients)
-                    .HasForeignKey(d => d.ClientAddressId)
-                    .HasConstraintName("FK__client__clientAd__398D8EEE");
             });
 
             modelBuilder.Entity<ClientAddress>(entity =>
@@ -80,24 +74,11 @@ namespace ACME.Models.DatabaseModels
                 entity.Property(e => e.ClientAddressAddressLine4).IsUnicode(false);
 
                 entity.Property(e => e.ClientAddressPostalCode).IsUnicode(false);
-            });
-
-            modelBuilder.Entity<OrderDetail>(entity =>
-            {
-                entity.HasKey(e => e.OrderDetailsId)
-                    .HasName("PK__orderDet__5EEE527302548292");
 
                 entity.HasOne(d => d.Client)
-                    .WithMany(p => p.OrderDetails)
+                    .WithMany(p => p.ClientAddresses)
                     .HasForeignKey(d => d.ClientId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__orderDeta__clien__45F365D3");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__orderDeta__produ__46E78A0C");
+                    .HasConstraintName("FK__clientAdd__clien__4D94879B");
             });
 
             modelBuilder.Entity<Product>(entity =>

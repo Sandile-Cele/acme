@@ -13,7 +13,7 @@ namespace ACME.Models.DatabaseModels
     {
         public Client()
         {
-            OrderDetails = new HashSet<OrderDetail>();
+            ClientAddresses = new HashSet<ClientAddress>();
         }
 
         [Key]
@@ -35,13 +35,8 @@ namespace ACME.Models.DatabaseModels
         [Column("clientPassword")]
         [StringLength(255)]
         public string ClientPassword { get; set; }
-        [Column("clientAddressId")]
-        public int? ClientAddressId { get; set; }
 
-        [ForeignKey(nameof(ClientAddressId))]
-        [InverseProperty("Clients")]
-        public virtual ClientAddress ClientAddress { get; set; }
-        [InverseProperty(nameof(OrderDetail.Client))]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        [InverseProperty(nameof(ClientAddress.Client))]
+        public virtual ICollection<ClientAddress> ClientAddresses { get; set; }
     }
 }

@@ -24,9 +24,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.ClientPassword)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientAddress)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,9 +41,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClientPassword)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientAddress.ClientAddressPostalCode)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ClientId">Edit</a> |

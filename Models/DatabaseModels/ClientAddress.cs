@@ -11,14 +11,11 @@ namespace ACME.Models.DatabaseModels
     [Table("clientAddress")]
     public partial class ClientAddress
     {
-        public ClientAddress()
-        {
-            Clients = new HashSet<Client>();
-        }
-
         [Key]
         [Column("clientAddressId")]
         public int ClientAddressId { get; set; }
+        [Column("clientId")]
+        public int? ClientId { get; set; }
         [Column("clientAddressAddressLine1")]
         [StringLength(255)]
         public string ClientAddressAddressLine1 { get; set; }
@@ -36,7 +33,8 @@ namespace ACME.Models.DatabaseModels
         [StringLength(255)]
         public string ClientAddressPostalCode { get; set; }
 
-        [InverseProperty(nameof(Client.ClientAddress))]
-        public virtual ICollection<Client> Clients { get; set; }
+        [ForeignKey(nameof(ClientId))]
+        [InverseProperty("ClientAddresses")]
+        public virtual Client Client { get; set; }
     }
 }

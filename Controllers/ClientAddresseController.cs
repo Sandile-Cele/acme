@@ -9,22 +9,23 @@ using ACME.Models.DatabaseModels;
 
 namespace ACME.Controllers
 {
-    public class ClientController : Controller
+    public class ClientAddresseController : Controller
     {
         private readonly AcmeContext _context;
 
-        public ClientController(AcmeContext context)
+        public ClientAddresseController(AcmeContext context)
         {
             _context = context;
         }
 
-        // GET: Client
+        // GET: ClientAddresse
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clients.ToListAsync());
+            var acmeContext = _context.ClientAddresses.Include(c => c.Client);
+            return View(await acmeContext.ToListAsync());
         }
 
-        // GET: Client/Details/5
+        // GET: ClientAddresse/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +33,42 @@ namespace ACME.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients
-                .FirstOrDefaultAsync(m => m.ClientId == id);
-            if (client == null)
+            var clientAddress = await _context.ClientAddresses
+                .Include(c => c.Client)
+                .FirstOrDefaultAsync(m => m.ClientAddressId == id);
+            if (clientAddress == null)
             {
                 return NotFound();
             }
 
-            return View(client);
+            return View(clientAddress);
         }
 
-        // GET: Client/Create
+        // GET: ClientAddresse/Create
         public IActionResult Create()
         {
+            ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "ClientEmail");
             return View();
         }
 
-        // POST: Client/Create
+        // POST: ClientAddresse/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientId,ClientName,ClientSurname,ClientEmail,ClientPassword")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientAddressId,ClientId,ClientAddressAddressLine1,ClientAddressAddressLine2,ClientAddressAddressLine3,ClientAddressAddressLine4,ClientAddressPostalCode")] ClientAddress clientAddress)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(client);
+                _context.Add(clientAddress);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(client);
+            ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "ClientEmail", clientAddress.ClientId);
+            return View(clientAddress);
         }
 
-        // GET: Client/Edit/5
+        // GET: ClientAddresse/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +76,23 @@ namespace ACME.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients.FindAsync(id);
-            if (client == null)
+            var clientAddress = await _context.ClientAddresses.FindAsync(id);
+            if (clientAddress == null)
             {
                 return NotFound();
             }
-            return View(client);
+            ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "ClientEmail", clientAddress.ClientId);
+            return View(clientAddress);
         }
 
-        // POST: Client/Edit/5
+        // POST: ClientAddresse/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClientId,ClientName,ClientSurname,ClientEmail,ClientPassword")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientAddressId,ClientId,ClientAddressAddressLine1,ClientAddressAddressLine2,ClientAddressAddressLine3,ClientAddressAddressLine4,ClientAddressPostalCode")] ClientAddress clientAddress)
         {
-            if (id != client.ClientId)
+            if (id != clientAddress.ClientAddressId)
             {
                 return NotFound();
             }
@@ -96,12 +101,12 @@ namespace ACME.Controllers
             {
                 try
                 {
-                    _context.Update(client);
+                    _context.Update(clientAddress);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientExists(client.ClientId))
+                    if (!ClientAddressExists(clientAddress.ClientAddressId))
                     {
                         return NotFound();
                     }
@@ -112,10 +117,11 @@ namespace ACME.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(client);
+            ViewData["ClientId"] = new SelectList(_context.Clients, "ClientId", "ClientEmail", clientAddress.ClientId);
+            return View(clientAddress);
         }
 
-        // GET: Client/Delete/5
+        // GET: ClientAddresse/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +129,31 @@ namespace ACME.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients
-                .FirstOrDefaultAsync(m => m.ClientId == id);
-            if (client == null)
+            var clientAddress = await _context.ClientAddresses
+                .Include(c => c.Client)
+                .FirstOrDefaultAsync(m => m.ClientAddressId == id);
+            if (clientAddress == null)
             {
                 return NotFound();
             }
 
-            return View(client);
+            return View(clientAddress);
         }
 
-        // POST: Client/Delete/5
+        // POST: ClientAddresse/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var client = await _context.Clients.FindAsync(id);
-            _context.Clients.Remove(client);
+            var clientAddress = await _context.ClientAddresses.FindAsync(id);
+            _context.ClientAddresses.Remove(clientAddress);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClientExists(int id)
+        private bool ClientAddressExists(int id)
         {
-            return _context.Clients.Any(e => e.ClientId == id);
+            return _context.ClientAddresses.Any(e => e.ClientAddressId == id);
         }
     }
 }
