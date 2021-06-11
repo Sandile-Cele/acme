@@ -1,4 +1,14 @@
 ﻿create database acme
+use acme 
+
+create table clientAddress(
+	clientAddressId int IDENTITY(1,1) PRIMARY KEY not null,
+	clientAddressAddressLine1 varchar(255),
+	clientAddressAddressLine2 varchar(255),
+	clientAddressAddressLine3 varchar(255),
+	clientAddressAddressLine4 varchar(255),
+	clientAddressPostalCode varchar(255) not null,
+);	
 
 create table client(
 	clientId int IDENTITY(1,1) PRIMARY KEY not null,
@@ -8,14 +18,6 @@ create table client(
 	clientPassword varchar(255) not null,
 	clientAddressId int foreign key references clientAddress(clientAddressId) 
 );
-
-create table clientAddress(
-	clientAddressId int IDENTITY(1,1) PRIMARY KEY not null,
-	clientAddressAddress1 varchar(255),
-	clientAddressAddress2 varchar(255),
-	clientAddressPostalCode varchar(255) not null,
-	clientAddressCity varchar(255),
-);	
 
 create table administer(
 	administerId int IDENTITY(1,1) PRIMARY KEY not null,
