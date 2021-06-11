@@ -1,0 +1,52 @@
+﻿@model ACME.Models.DatabaseModels.Client
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Client</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClientName" class="control-label"></label>
+                <input asp-for="ClientName" class="form-control" />
+                <span asp-validation-for="ClientName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientSurname" class="control-label"></label>
+                <input asp-for="ClientSurname" class="form-control" />
+                <span asp-validation-for="ClientSurname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientEmail" class="control-label"></label>
+                <input asp-for="ClientEmail" class="form-control" />
+                <span asp-validation-for="ClientEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientPassword" class="control-label"></label>
+                <input asp-for="ClientPassword" class="form-control" />
+                <span asp-validation-for="ClientPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientAddressId" class="control-label"></label>
+                <select asp-for="ClientAddressId" class ="form-control" asp-items="ViewBag.ClientAddressId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
