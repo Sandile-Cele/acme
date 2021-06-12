@@ -103,11 +103,13 @@ namespace ACME.Controllers
         }
 
         // GET: Client/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
+            int? id = HttpContext.Session.GetInt32("currentClientId");
+
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("login", "client");
             }
 
             var client = await _context.Clients.FindAsync(id);

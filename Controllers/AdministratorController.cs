@@ -34,17 +34,17 @@ namespace ACME.Controllers
             {
                 string hashPassword = new Security().ComputeSha256Hash(inPassword);
 
-                Administrator getUser = await _context.Administrators
+                Administrator getAdmin = await _context.Administrators
                     .FirstOrDefaultAsync(m => m.AdministratorUsername.Equals(inUsername) & m.AdministratorPassword.Equals(hashPassword));
 
-                if (getUser == null)
+                if (getAdmin == null)
                 {
                     ViewBag.userNotFound = "You have entered an invalid username or password";
                     return Login();
                 }
 
                 //success, sending user to dashboard
-                HttpContext.Session.SetInt32("currentAdminId", getUser.AdministratorId);//storing PK of user
+                HttpContext.Session.SetInt32("currentAdminId", getAdmin.AdministratorId);//storing PK of user
                 return RedirectToAction("index", "products");
 
             }
@@ -78,11 +78,13 @@ namespace ACME.Controllers
         }
 
         // GET: Administrator/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
+            int ? id = HttpContext.Session.GetInt32("currentAdminId");
+
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("login", "Administrator");
             }
 
             var administrator = await _context.Administrators.FindAsync(id);
@@ -106,7 +108,7 @@ namespace ACME.Controllers
 
             if (id == null)
             {
-                return RedirectToAction("login", "client");
+                return RedirectToAction("login", "Administrator");
             }
 
             var administrator = await _context.Administrators

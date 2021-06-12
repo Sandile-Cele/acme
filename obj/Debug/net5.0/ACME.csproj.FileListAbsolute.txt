@@ -168,3 +168,8 @@ C:\cave\repos\ACME\obj\Debug\net5.0\Razor\Views\Administrator\Edit.cshtml.g.cs
 C:\cave\repos\ACME\obj\Debug\net5.0\Razor\Views\Administrator\Index.cshtml.g.cs
 C:\cave\repos\ACME\obj\Debug\net5.0\Razor\Views\Administrator\Signup.cshtml.g.cs
 C:\cave\repos\ACME\obj\Debug\net5.0\Razor\Views\Administrator\Login.cshtml.g.cs
+C:\cave\repos\ACME\obj\Debug\net5.0\Razor\Views\Category\Create.cshtml.g.cs
+C:\cave\repos\ACME\obj\Debug\net5.0\Razor\Views\Category\Delete.cshtml.g.cs
+C:\cave\repos\ACME\obj\Debug\net5.0\Razor\Views\Category\Details.cshtml.g.cs
+C:\cave\repos\ACME\obj\Debug\net5.0\Razor\Views\Category\Edit.cshtml.g.cs
+C:\cave\repos\ACME\obj\Debug\net5.0\Razor\Views\Category\Index.cshtml.g.cs
