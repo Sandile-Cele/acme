@@ -43,8 +43,7 @@ namespace ACME.Controllers
                     return Login();
                 }
 
-                //success, sending user to dashboard
-                HttpContext.Session.SetInt32("currentUserId", getUser.ClientId);//storing PK of user
+                HttpContext.Session.SetInt32("currentClientId", getUser.ClientId);//storing PK of user
                 return RedirectToAction("index", "products");
 
             }
@@ -71,7 +70,7 @@ namespace ACME.Controllers
                 _context.Add(client);
                 await _context.SaveChangesAsync();
 
-                HttpContext.Session.SetInt32("currentUserId", client.ClientId);//storing PK of user
+                HttpContext.Session.SetInt32("currentClientId", client.ClientId);//storing PK of user
                 return RedirectToAction(nameof(Index));
             }
             return View(client);
@@ -84,11 +83,13 @@ namespace ACME.Controllers
         }
 
         // GET: Client/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
+            int? id = HttpContext.Session.GetInt32("currentUserId");
+
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("login", "client");
             }
 
             var client = await _context.Clients

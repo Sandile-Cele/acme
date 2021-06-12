@@ -44,7 +44,7 @@ namespace ACME.Controllers
                 }
 
                 //success, sending user to dashboard
-                HttpContext.Session.SetInt32("currentUserId", getUser.AdministratorId);//storing PK of user
+                HttpContext.Session.SetInt32("currentAdminId", getUser.AdministratorId);//storing PK of user
                 return RedirectToAction("index", "products");
 
             }
@@ -100,11 +100,13 @@ namespace ACME.Controllers
         }
 
         // GET: Administrator/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
+            int? id = HttpContext.Session.GetInt32("currentAdminId");
+
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("login", "client");
             }
 
             var administrator = await _context.Administrators
