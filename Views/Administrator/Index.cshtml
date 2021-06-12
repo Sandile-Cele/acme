@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ACME.Models.DatabaseModels.Administrator>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AdministratorEmployeeNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdministratorUsername)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdministratorPassword)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdministratorEmployeeNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdministratorUsername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdministratorPassword)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AdministratorId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AdministratorId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AdministratorId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

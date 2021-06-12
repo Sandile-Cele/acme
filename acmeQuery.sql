@@ -26,7 +26,6 @@ create table administrator(
 	administratorPassword varchar(255) not null,
 );
 
-
 create table category (
 	categoryId int IDENTITY(1,1) PRIMARY KEY not null,
 	categoryName varchar(255) not null,
@@ -41,7 +40,6 @@ create table product(
 	productPrice decimal (19,4) not null,  
 	categoryId int foreign key references category(categoryId)
 );
-
 
 create table orderDetails(
 	orderDetailsId int IDENTITY(1,1) PRIMARY KEY not null,

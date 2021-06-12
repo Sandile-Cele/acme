@@ -26,6 +26,10 @@ namespace ACME
         {
             services.AddControllersWithViews();
 
+            services.AddMvc()
+                .AddSessionStateTempDataProvider();
+            services.AddSession();
+
             services.AddDbContext<AcmeContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AcmeConnectionString")));
         }
@@ -41,6 +45,7 @@ namespace ACME
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseSession();
             app.UseStaticFiles();
 
             app.UseRouting();

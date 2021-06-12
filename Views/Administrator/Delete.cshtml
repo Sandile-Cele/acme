@@ -1,4 +1,4 @@
-﻿@model ACME.Models.DatabaseModels.Administer
+﻿@model ACME.Models.DatabaseModels.Administrator
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,31 +8,31 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Administer</h4>
+    <h4>Administrator</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AdministerEmployeeNumber)
+            @Html.DisplayNameFor(model => model.AdministratorEmployeeNumber)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AdministerEmployeeNumber)
+            @Html.DisplayFor(model => model.AdministratorEmployeeNumber)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AdministerUsername)
+            @Html.DisplayNameFor(model => model.AdministratorUsername)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AdministerUsername)
+            @Html.DisplayFor(model => model.AdministratorUsername)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AdministerPassword)
+            @Html.DisplayNameFor(model => model.AdministratorPassword)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AdministerPassword)
+            @Html.DisplayFor(model => model.AdministratorPassword)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="AdministerId" />
+        <input type="hidden" asp-for="AdministratorId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
