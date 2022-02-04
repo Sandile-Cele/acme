@@ -1,35 +1,5 @@
 #ACME research
 
-### Design
-
-![](RackMultipart20220204-4-pv4k0h_html_cbf058037582b58f.png)Could have improved on design. Could have used eye-catchy colours rather than white. I could have done more with they way that I listed products. First would be the ability to click on product to view more details like in the illustration. Second will would be the option to view products as a list rather than a list. And add product images in the main page.
-
-###
-
-###
-
-### Login
-
-Rather than designing two login and register screens for admin and customers I could have had one login and register screen. When a user registers, they will choose whether they are a customer or admin.
-
-### Ability for admins to delete products
-
-Currently admins cannot delete products if it is ordered by user. Admins might have a good reason to remove a product e.g., out of stock. I could improve this by giving admins the ability to delete products then send a message to users that product has been removed.
-
-## Performance
-
-### String concatenation
-
-Rather than concatenating strings (add strings) with a &quot;+&quot; I could have used a string builder class. After testing I found that especially in for loops using string builders is more efficient.
-
-### Async
-
-I was able to use asynchronous methods especially when I was querying the database.
-
-### Loops
-
-I could have used normal for loops rather than foreach loop (Henry Payne , 2012).
-
 # Introduction
 
 Following document will explain what methodologies, DevOps ,and frameworks are and why they are important. This document has been written in a way to ensure that individuals without a solid background in computer science are able to comprehend the ideas presented, with no difficulty.
